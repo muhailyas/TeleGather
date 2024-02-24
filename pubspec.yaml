@@ -38,6 +38,7 @@ dependencies:
   zego_uikit_prebuilt_video_conference: ^2.6.9
   provider: ^6.1.1
   image_picker: ^1.0.7
+  firebase_core: ^2.24.2
 
 dev_dependencies:
   flutter_test:

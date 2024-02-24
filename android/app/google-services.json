@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "978684389670",
+    "project_id": "telegather-8586c",
+    "storage_bucket": "telegather-8586c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:978684389670:android:1eccd39f1910ab964af9e7",
+        "android_client_info": {
+          "package_name": "com.mrvl.telegather"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyASyJ01hiqGSnupmUHl5hICiDvCE9-W6oQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
