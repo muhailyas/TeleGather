@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:video_call_app/features/home/view/home.dart';
+import 'package:provider/provider.dart';
+import 'package:video_call_app/core/responsive/responsive.dart';
+import 'package:video_call_app/features/authentication/controller/authentication_controller.dart';
+import 'package:video_call_app/features/authentication/view/login.dart';
+import 'package:video_call_app/features/proflie/controller/image_controller.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -11,14 +15,26 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'TeleGather',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
+    Responsive.init(context);
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider<ImageController>(
+          create: (context) => ImageController(),
+        ),
+        ChangeNotifierProvider<AuthenticationController>(
+          create: (context) => AuthenticationController(),
+        ),
+      ],
+      child: MaterialApp(
+        theme: ThemeData(
+            scaffoldBackgroundColor: Colors.black,
+            appBarTheme: const AppBarTheme(
+              backgroundColor: Colors.black,
+            )),
+        debugShowCheckedModeBanner: false,
+        title: 'TeleGather',
+        home: const ScreenLogin(),
       ),
-      home: const ScreenHome(),
     );
   }
 }
