@@ -1,4 +1,4 @@
-package com.example.video_call_app
+package com.mrvl.telegather
 
 import io.flutter.embedding.android.FlutterActivity
 

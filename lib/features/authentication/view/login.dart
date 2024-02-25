@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:video_call_app/core/responsive/responsive.dart';
+import 'package:video_call_app/core/utils/utils.dart';
 import 'package:video_call_app/features/authentication/controller/authentication_controller.dart';
+import 'package:video_call_app/features/authentication/model/login_model.dart';
 import 'package:video_call_app/features/authentication/view/sign_up.dart';
-import 'package:video_call_app/features/home/view/home.dart';
-
+import 'package:video_call_app/features/authentication/view/widgets/elevated_button_widget.dart';
 import 'widgets/text_field.dart';
 
 class ScreenLogin extends StatelessWidget {
@@ -39,12 +40,12 @@ class ScreenLogin extends StatelessWidget {
                       "Join the conversation, anytime, anywhere",
                       style: TextStyle(fontSize: 20, color: Colors.white),
                     ),
-                    SizedBox(height: Responsive.height * 0.01),
+                    SizedBox(height: Responsive.height * 0.02),
                   ],
                 ),
               ),
               TextFormFieldWidget(
-                controller: authProvider.usernameController,
+                controller: authProvider.emailController,
                 label: 'Email',
               ),
               SizedBox(height: Responsive.height * 0.02),
@@ -53,46 +54,41 @@ class ScreenLogin extends StatelessWidget {
                 label: 'Password',
               ),
               SizedBox(height: Responsive.height * 0.02),
-              ElevatedButton(
-                onPressed: () async {
-                  if (authProvider.loginFormKey.currentState!.validate()) {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const ScreenHome()));
-                  }
+              Consumer<AuthenticationController>(builder: (context, value, _) {
+                return ElevatedButtonWidget(
+                    label: 'Login',
+                    authProvider: authProvider,
+                    onPressed: () {
+                      if (authProvider.loginFormKey.currentState!.validate()) {
+                        final loginModel = LoginModel(
+                            email: authProvider.emailController.text.trim(),
+                            password:
+                                authProvider.passwordController.text.trim());
+                        context
+                            .read<AuthenticationController>()
+                            .signWithEmailAndPassword(
+                                loginModel: loginModel, context: context)
+                            .then((value) {
+                          showResult(value, context);
+                          clearForm(authProvider);
+                        });
+                      }
+                    });
+              }),
+              SizedBox(height: Responsive.height * 0.02),
+              InkWell(
+                onTap: () {
+                  Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const ScreenSignUp()));
                 },
-                style: ButtonStyle(
-                    shape: MaterialStatePropertyAll(RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(30))),
-                    fixedSize: MaterialStatePropertyAll(Size(
-                        Responsive.width * 0.8, Responsive.height * 0.065)),
-                    backgroundColor:
-                        const MaterialStatePropertyAll(Colors.white)),
-                child: const Text(
-                  "Login",
-                  style: TextStyle(
-                      color: Colors.teal,
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold),
+                child: Text(
+                  "Don't have an account?",
+                  style:
+                      TextStyle(color: Colors.teal.withOpacity(0.9).withRed(5)),
                 ),
               ),
-              SizedBox(height: Responsive.height * 0.02),
-              Align(
-                  alignment: const Alignment(-0.65, 0),
-                  child: InkWell(
-                    onTap: () {
-                      Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const ScreenSignUp()));
-                    },
-                    child: Text(
-                      "Don't have an account?",
-                      style: TextStyle(
-                          color: Colors.teal.withOpacity(0.9).withRed(5)),
-                    ),
-                  )),
               SizedBox(height: Responsive.height * 0.02),
             ],
           ),
@@ -100,4 +96,10 @@ class ScreenLogin extends StatelessWidget {
       ),
     );
   }
+}
+
+void clearForm(AuthenticationController controller) {
+  controller.emailController.clear();
+  controller.passwordController.clear();
+  controller.confirmPasswordController.clear();
 }

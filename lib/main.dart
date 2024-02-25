@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:video_call_app/core/responsive/responsive.dart';
 import 'package:video_call_app/features/authentication/controller/authentication_controller.dart';
-import 'package:video_call_app/features/authentication/view/login.dart';
 import 'package:video_call_app/features/proflie/controller/image_controller.dart';
+import 'package:video_call_app/features/splash/controller/splash_controller.dart';
+import 'package:video_call_app/features/splash/view/splash.dart';
 import 'package:video_call_app/firebase_options.dart';
 
 Future<void> main() async {
@@ -29,6 +30,9 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider<AuthenticationController>(
           create: (context) => AuthenticationController(),
         ),
+        ChangeNotifierProvider<SplashController>(
+          create: (context) => SplashController(),
+        ),
       ],
       child: MaterialApp(
         theme: ThemeData(
@@ -38,7 +42,7 @@ class MyApp extends StatelessWidget {
             )),
         debugShowCheckedModeBanner: false,
         title: 'TeleGather',
-        home: const ScreenLogin(),
+        home: const ScreenSplash(),
       ),
     );
   }

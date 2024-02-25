@@ -3,8 +3,25 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:video_call_app/core/constants/constants.dart';
 import 'package:video_call_app/core/responsive/responsive.dart';
+import 'package:video_call_app/core/theme/theme.dart';
 import 'package:video_call_app/features/proflie/controller/image_controller.dart';
+import 'package:video_call_app/features/proflie/view/widgets/alert_dialog_widget.dart';
 import 'package:video_call_app/features/proflie/view/widgets/info_field_widget.dart';
+
+class CustomButton extends StatelessWidget {
+  const CustomButton({super.key, required this.onPressed, required this.child});
+  final VoidCallback onPressed;
+  final Widget child;
+
+  @override
+  Widget build(BuildContext context) {
+    return ElevatedButton(
+      onPressed: onPressed,
+      style: buttonStyle,
+      child: child,
+    );
+  }
+}
 
 class ScreenProfile extends StatelessWidget {
   const ScreenProfile({super.key});
@@ -58,6 +75,18 @@ class ScreenProfile extends StatelessWidget {
             _buildInfoFields()
           ],
         ),
+        const Spacer(),
+        CustomButton(
+          onPressed: () {
+            showDialog(
+              context: context,
+              builder: (context) {
+                return const AlertDialogWidget();
+              },
+            );
+          },
+          child: const Text('Logout'),
+        )
       ],
     );
   }
