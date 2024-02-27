@@ -1,27 +1,63 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:video_call_app/core/constants/constants.dart';
+import 'package:video_call_app/core/responsive/responsive.dart';
+import 'package:video_call_app/features/home/controller/home_controller.dart';
+import 'package:video_call_app/features/home/view/join_with_code.dart';
 import 'package:video_call_app/features/home/view/widgets/meeting_start_widget.dart';
+import 'package:video_call_app/features/home/view/widgets/new_conference.dart';
+import 'package:video_call_app/features/proflie/controller/profile_controller.dart';
 import 'package:video_call_app/features/proflie/view/profile.dart';
+import 'widgets/conference_list_widget.dart';
 
 class ScreenHome extends StatelessWidget {
   const ScreenHome({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(appBar: _buildAppBar(context), body: _buildBody());
+    context.read<ProfileController>().getUserProfile();
+    context.read<HomeController>().getConferences();
+    return Scaffold(appBar: _buildAppBar(context), body: _buildBody(context));
   }
 
-  Row _buildBody() {
-    return const Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+  Widget _buildBody(BuildContext context) {
+    return Column(
       children: [
-        MeetingStartWidget(text: 'New meeting'),
-        MeetingStartWidget(
-          text: 'Join with a link',
-          border: true,
-          backgroundColor: Colors.black,
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            InkWell(
+                onTap: () {
+                  showModalBottomSheet(
+                      context: context,
+                      builder: (context) => const NewConferenceBottomSheet());
+                },
+                child: const MeetingStartWidget(text: 'New meeting')),
+            InkWell(
+              onTap: () {
+                Navigator.push(
+                    context,
+                    CupertinoPageRoute(
+                        builder: (context) => ScreenJoinWithCode()));
+              },
+              child: const MeetingStartWidget(
+                text: 'Join with a code',
+                border: true,
+                backgroundColor: Colors.black,
+              ),
+            ),
+          ],
         ),
+        SizedBox(height: Responsive.height * 0.01),
+        _buildConferenceItems()
       ],
+    );
+  }
+
+  Expanded _buildConferenceItems() {
+    return const Expanded(
+      child: ConferenceListWidget(),
     );
   }
 
@@ -47,9 +83,13 @@ class ScreenHome extends StatelessWidget {
                     MaterialPageRoute(
                         builder: (context) => const ScreenProfile()));
               },
-              child: CircleAvatar(
-                backgroundImage: NetworkImage(people[0]['profile'].toString()),
-              ),
+              child: Consumer<ProfileController>(builder: (context, value, _) {
+                return CircleAvatar(
+                  backgroundImage: value.profileImage.isEmpty
+                      ? const NetworkImage(placeHolderImage)
+                      : NetworkImage(value.profileImage),
+                );
+              }),
             ),
           )
         ],

@@ -70,7 +70,7 @@ class ScreenLogin extends StatelessWidget {
                                 loginModel: loginModel, context: context)
                             .then((value) {
                           showResult(value, context);
-                          clearForm(authProvider);
+                          clearForm(authProvider, value);
                         });
                       }
                     });
@@ -96,10 +96,4 @@ class ScreenLogin extends StatelessWidget {
       ),
     );
   }
-}
-
-void clearForm(AuthenticationController controller) {
-  controller.emailController.clear();
-  controller.passwordController.clear();
-  controller.confirmPasswordController.clear();
 }

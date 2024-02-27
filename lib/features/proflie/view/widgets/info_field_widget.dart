@@ -16,7 +16,9 @@ class InfoFieldWidget extends StatelessWidget {
         borderRadius: BorderRadius.circular(20),
       ),
       child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 15),
+        padding: EdgeInsets.symmetric(
+            vertical: Responsive.height * 0.012,
+            horizontal: Responsive.width * 0.04),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,

@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:video_call_app/core/responsive/responsive.dart';
 import 'package:video_call_app/features/authentication/controller/authentication_controller.dart';
-import 'package:video_call_app/features/proflie/controller/image_controller.dart';
+import 'package:video_call_app/features/home/controller/home_controller.dart';
+import 'package:video_call_app/features/home/controller/join_controller.dart';
+import 'package:video_call_app/features/proflie/controller/profile_controller.dart';
 import 'package:video_call_app/features/splash/controller/splash_controller.dart';
 import 'package:video_call_app/features/splash/view/splash.dart';
 import 'package:video_call_app/firebase_options.dart';
@@ -24,14 +26,20 @@ class MyApp extends StatelessWidget {
     Responsive.init(context);
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider<ImageController>(
-          create: (context) => ImageController(),
-        ),
         ChangeNotifierProvider<AuthenticationController>(
           create: (context) => AuthenticationController(),
         ),
         ChangeNotifierProvider<SplashController>(
           create: (context) => SplashController(),
+        ),
+        ChangeNotifierProvider<ProfileController>(
+          create: (context) => ProfileController(),
+        ),
+        ChangeNotifierProvider<HomeController>(
+          create: (context) => HomeController(),
+        ),
+        ChangeNotifierProvider<JoinWithCodeController>(
+          create: (context) => JoinWithCodeController(),
         ),
       ],
       child: MaterialApp(

@@ -1,11 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:video_call_app/core/responsive/responsive.dart';
 import 'package:video_call_app/core/theme/theme.dart';
+import 'package:video_call_app/features/home/controller/join_controller.dart';
 
 class TextFormFieldWidget extends StatelessWidget {
-  const TextFormFieldWidget(
-      {super.key, required this.controller, required this.label});
+  const TextFormFieldWidget({
+    super.key,
+    required this.controller,
+    required this.label,
+    this.isJoinCode = false,
+  });
   final String label;
+  final bool isJoinCode;
   final TextEditingController controller;
 
   @override
@@ -14,6 +21,13 @@ class TextFormFieldWidget extends StatelessWidget {
         padding: EdgeInsets.symmetric(horizontal: Responsive.width * 0.09),
         child: TextFormField(
           controller: controller,
+          onChanged: (value) {
+            if (isJoinCode) {
+              context
+                  .read<JoinWithCodeController>()
+                  .validateJoinCode(value.trim());
+            }
+          },
           validator: (value) {
             if (value!.isEmpty) {
               return "$label is required";

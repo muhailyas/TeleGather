@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:video_call_app/features/authentication/controller/authentication_controller.dart';
 import 'package:video_call_app/features/authentication/view/login.dart';
-import 'package:video_call_app/features/proflie/view/profile.dart';
+import 'package:video_call_app/features/proflie/view/widgets/custom_button.dart';
 
 class AlertDialogWidget extends StatelessWidget {
   const AlertDialogWidget({super.key});

@@ -7,6 +7,7 @@ import 'package:video_call_app/features/authentication/model/sign_up_model.dart'
 import 'package:video_call_app/features/authentication/view/login.dart';
 import 'package:video_call_app/features/authentication/view/widgets/elevated_button_widget.dart';
 import 'package:video_call_app/features/authentication/view/widgets/text_field.dart';
+import 'package:video_call_app/features/proflie/controller/profile_controller.dart';
 
 class ScreenSignUp extends StatelessWidget {
   const ScreenSignUp({super.key});
@@ -78,7 +79,8 @@ class ScreenSignUp extends StatelessWidget {
                             signUpModel: signUpModel, context: context)
                         .then((value) {
                       showResult(value, context);
-                      clearForm(authProvider);
+                      createAccount(context, value);
+                      clearForm(authProvider, value);
                     });
                   }
                 },
@@ -103,5 +105,12 @@ class ScreenSignUp extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  void createAccount(BuildContext context, String value) {
+    if (value != 'navigate-to-login') {
+      return;
+    }
+    context.read<ProfileController>().createProfile();
   }
 }

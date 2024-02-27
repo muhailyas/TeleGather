@@ -36,6 +36,11 @@ class AuthenticationController extends ChangeNotifier {
       {required SignUpModel signUpModel, required BuildContext context}) async {
     loading = true;
     notifyListeners();
+    if (signUpModel.confirmPassword != signUpModel.password) {
+      loading = false;
+      notifyListeners();
+      return 'Passwords do not match';
+    }
     final response = await _authServices.signUpWithEmailAndPassword(
         signUpModel: signUpModel);
     response.fold((l) {
