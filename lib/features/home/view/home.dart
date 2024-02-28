@@ -33,7 +33,9 @@ class ScreenHome extends StatelessWidget {
                       context: context,
                       builder: (context) => const NewConferenceBottomSheet());
                 },
-                child: const MeetingStartWidget(text: 'New meeting')),
+                child: MeetingStartWidget(
+                    text: 'New meeting',
+                    textColor: Theme.of(context).colorScheme.secondary)),
             InkWell(
               onTap: () {
                 Navigator.push(
@@ -41,10 +43,11 @@ class ScreenHome extends StatelessWidget {
                     CupertinoPageRoute(
                         builder: (context) => ScreenJoinWithCode()));
               },
-              child: const MeetingStartWidget(
+              child: MeetingStartWidget(
                 text: 'Join with a code',
                 border: true,
-                backgroundColor: Colors.black,
+                textColor: Theme.of(context).colorScheme.secondary,
+                backgroundColor: Theme.of(context).colorScheme.background,
               ),
             ),
           ],
@@ -66,11 +69,11 @@ class ScreenHome extends StatelessWidget {
       preferredSize: const Size.fromHeight(65),
       child: AppBar(
         elevation: 0,
-        backgroundColor: Colors.black,
-        title: const Text("TeleGather",
+        backgroundColor: Theme.of(context).colorScheme.background,
+        title: Text("TeleGather",
             style: TextStyle(
               fontSize: 22,
-              color: Colors.white,
+              color: Theme.of(context).colorScheme.secondary,
               fontWeight: FontWeight.w600,
             )),
         actions: [

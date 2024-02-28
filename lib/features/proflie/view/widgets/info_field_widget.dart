@@ -12,7 +12,7 @@ class InfoFieldWidget extends StatelessWidget {
       width: Responsive.width * 0.62,
       height: Responsive.height * 0.048,
       decoration: BoxDecoration(
-        border: Border.all(color: Colors.teal),
+        border: Border.all(color: Theme.of(context).colorScheme.primary),
         borderRadius: BorderRadius.circular(20),
       ),
       child: Padding(
@@ -28,8 +28,8 @@ class InfoFieldWidget extends StatelessWidget {
               child: Text(
                 text,
                 overflow: TextOverflow.ellipsis,
-                style: const TextStyle(
-                  color: Colors.white,
+                style: TextStyle(
+                  color: Theme.of(context).colorScheme.secondary,
                 ),
               ),
             ),

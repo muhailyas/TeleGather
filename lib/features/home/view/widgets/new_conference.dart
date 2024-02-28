@@ -10,8 +10,8 @@ class NewConferenceBottomSheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.teal,
-      height: Responsive.height * 0.16,
+      color: Theme.of(context).colorScheme.primary,
+      height: Responsive.height * 0.18,
       child: Consumer<HomeController>(builder: (context, data, _) {
         return Column(
           children: [
@@ -22,14 +22,17 @@ class NewConferenceBottomSheet extends StatelessWidget {
                     .startQuickConference()
                     .then((value) => result(value, context, data));
               },
-              leading:
-                  const Icon(Icons.video_call_rounded, color: Colors.white),
-              title: const Text(
+              leading: Icon(Icons.video_call_rounded,
+                  color: Theme.of(context).colorScheme.secondary),
+              title: Text(
                 "Start a quick conference",
-                style: TextStyle(color: Colors.white),
+                style: TextStyle(
+                    color: Theme.of(context).colorScheme.secondary,
+                    fontSize: Responsive.text * 16),
               ),
             ),
-            const Divider(color: Colors.white, thickness: 1),
+            Divider(
+                color: Theme.of(context).colorScheme.secondary, thickness: 1),
             ListTile(
               onTap: () {
                 context.read<HomeController>().getConferenceLinkToLink();
@@ -37,18 +40,18 @@ class NewConferenceBottomSheet extends StatelessWidget {
                   context: context,
                   builder: (context) {
                     return AlertDialog(
-                      backgroundColor: Colors.teal,
+                      backgroundColor: Theme.of(context).colorScheme.primary,
                       title: Text(
                         "Here's the code to your conference",
                         style: TextStyle(
-                          color: Colors.white,
+                          color: Theme.of(context).colorScheme.secondary,
                           fontSize: Responsive.text * 16,
                         ),
                       ),
                       content: Text(
                         "Copy this code and send it to people you want to meet with. Be sure to save it so you can use it later,too.",
                         style: TextStyle(
-                          color: Colors.white,
+                          color: Theme.of(context).colorScheme.secondary,
                           fontSize: Responsive.text * 16,
                         ),
                       ),
@@ -73,12 +76,16 @@ class NewConferenceBottomSheet extends StatelessWidget {
                                     child: Text(
                                       data.instantId,
                                       overflow: TextOverflow.ellipsis,
-                                      style:
-                                          const TextStyle(color: Colors.white),
+                                      style: TextStyle(
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .secondary),
                                     ),
                                   ),
-                                  const Icon(Icons.copy_outlined,
-                                      color: Colors.white)
+                                  Icon(Icons.copy_outlined,
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .secondary)
                                 ],
                               ),
                             ),
@@ -89,10 +96,13 @@ class NewConferenceBottomSheet extends StatelessWidget {
                   },
                 );
               },
-              leading: const Icon(Icons.share, color: Colors.white),
-              title: const Text(
+              leading: Icon(Icons.share,
+                  color: Theme.of(context).colorScheme.secondary),
+              title: Text(
                 "Get a conference link to share",
-                style: TextStyle(color: Colors.white),
+                style: TextStyle(
+                    color: Theme.of(context).colorScheme.secondary,
+                    fontSize: Responsive.text * 16),
               ),
             ),
           ],

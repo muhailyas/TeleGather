@@ -64,9 +64,9 @@ class HomeServices {
       for (var doc in querySnapshot.docs) {
         await doc.reference.delete();
       }
-      print('Documents deleted successfully');
+      // print('Documents deleted successfully');
     } catch (e) {
-      print('Error deleting documents: $e');
+      // print('Error deleting documents: $e');
     }
   }
 

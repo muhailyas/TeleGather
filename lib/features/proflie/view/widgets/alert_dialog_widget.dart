@@ -10,13 +10,14 @@ class AlertDialogWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      backgroundColor: Colors.black,
+      backgroundColor: Theme.of(context).colorScheme.background,
       shape: OutlineInputBorder(
-          borderSide: const BorderSide(color: Colors.teal),
+          borderSide: BorderSide(color: Theme.of(context).colorScheme.primary),
           borderRadius: BorderRadius.circular(15)),
-      title: const Text("Logout", style: TextStyle(color: Colors.white)),
-      content: const Text("Are you sure want to logout",
-          style: TextStyle(color: Colors.white)),
+      title: Text("Logout",
+          style: TextStyle(color: Theme.of(context).colorScheme.secondary)),
+      content: Text("Are you sure want to logout",
+          style: TextStyle(color: Theme.of(context).colorScheme.secondary)),
       actions: [
         CustomButton(
             onPressed: () {
@@ -25,9 +26,16 @@ class AlertDialogWidget extends StatelessWidget {
                   .logOut()
                   .then((value) => navigate(context, value));
             },
-            child: const Text("Yes")),
+            child: Text(
+              "Yes",
+              style: TextStyle(color: Theme.of(context).colorScheme.secondary),
+            )),
         CustomButton(
-            onPressed: () => Navigator.pop(context), child: const Text("No")),
+            onPressed: () => Navigator.pop(context),
+            child: Text(
+              "No",
+              style: TextStyle(color: Theme.of(context).colorScheme.secondary),
+            )),
       ],
     );
   }

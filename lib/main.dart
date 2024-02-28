@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:video_call_app/core/responsive/responsive.dart';
+import 'package:video_call_app/core/theme/theme_provider.dart';
 import 'package:video_call_app/features/authentication/controller/authentication_controller.dart';
 import 'package:video_call_app/features/home/controller/home_controller.dart';
 import 'package:video_call_app/features/home/controller/join_controller.dart';
@@ -41,17 +42,19 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider<JoinWithCodeController>(
           create: (context) => JoinWithCodeController(),
         ),
+        ChangeNotifierProvider<UiProvider>(
+          create: (context) => UiProvider(),
+        ),
       ],
-      child: MaterialApp(
-        theme: ThemeData(
-            scaffoldBackgroundColor: Colors.black,
-            appBarTheme: const AppBarTheme(
-              backgroundColor: Colors.black,
-            )),
-        debugShowCheckedModeBanner: false,
-        title: 'TeleGather',
-        home: const ScreenSplash(),
-      ),
+      child: Consumer<UiProvider>(builder: (context, value, _) {
+        value.init();
+        return MaterialApp(
+          debugShowCheckedModeBanner: false,
+          title: 'TeleGather',
+          theme: value.isDark ? value.darkTheme : value.lightTheme,
+          home: const ScreenSplash(),
+        );
+      }),
     );
   }
 }

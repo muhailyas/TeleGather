@@ -20,13 +20,15 @@ class ElevatedButtonWidget extends StatelessWidget {
     return Consumer<AuthenticationController>(builder: (context, value, _) {
       return ElevatedButton(
         onPressed: onPressed,
-        style: elevatedButtonStyle,
+        style: elevatedButtonStyle(context),
         child: value.loading
-            ? const Center(child: CircularProgressIndicator(color: Colors.teal))
+            ? Center(
+                child: CircularProgressIndicator(
+                    color: Theme.of(context).colorScheme.primary))
             : Text(
                 label,
                 style: TextStyle(
-                    color: Colors.teal,
+                    color: Theme.of(context).colorScheme.secondary,
                     fontSize: Responsive.text * 20,
                     fontWeight: FontWeight.bold),
               ),

@@ -31,7 +31,7 @@ class ConferenceItemContainer extends StatelessWidget {
         child: Container(
           height: Responsive.height * 0.05,
           decoration: BoxDecoration(
-            color: Colors.teal.shade600,
+            color: Theme.of(context).colorScheme.primary,
             borderRadius: BorderRadius.circular(15),
           ),
           child: Padding(
@@ -43,7 +43,8 @@ class ConferenceItemContainer extends StatelessWidget {
               children: [
                 Text(
                   conferenceModel.conferenceId.substring(0, 20),
-                  style: const TextStyle(color: Colors.white),
+                  style:
+                      TextStyle(color: Theme.of(context).colorScheme.secondary),
                 ),
                 const Spacer(),
                 InkWell(
@@ -60,9 +61,10 @@ class ConferenceItemContainer extends StatelessWidget {
                       ),
                     );
                   },
-                  child: const Text(
+                  child: Text(
                     "Join",
-                    style: TextStyle(color: Colors.white),
+                    style: TextStyle(
+                        color: Theme.of(context).colorScheme.secondary),
                   ),
                 ),
                 SizedBox(width: Responsive.width * 0.05),
@@ -75,9 +77,10 @@ class ConferenceItemContainer extends StatelessWidget {
                         .then((value) => ScaffoldMessenger.of(context)
                             .showSnackBar(SnackBar(content: Text(value))));
                   },
-                  child: const Text(
+                  child: Text(
                     "Copy",
-                    style: TextStyle(color: Colors.white),
+                    style: TextStyle(
+                        color: Theme.of(context).colorScheme.secondary),
                   ),
                 ),
                 ValueListenableBuilder(
@@ -93,9 +96,10 @@ class ConferenceItemContainer extends StatelessWidget {
                                       ? SizedBox(
                                           height: Responsive.width * 0.04,
                                           width: Responsive.width * 0.04,
-                                          child:
-                                              const CircularProgressIndicator(
-                                                  color: Colors.white),
+                                          child: CircularProgressIndicator(
+                                              color: Theme.of(context)
+                                                  .colorScheme
+                                                  .secondary),
                                         )
                                       : InkWell(
                                           onTap: () {
@@ -105,9 +109,11 @@ class ConferenceItemContainer extends StatelessWidget {
                                                     conferenceModel
                                                         .conferenceId);
                                           },
-                                          child: const Text("Delete",
+                                          child: Text("Delete",
                                               style: TextStyle(
-                                                  color: Colors.white)),
+                                                  color: Theme.of(context)
+                                                      .colorScheme
+                                                      .secondary)),
                                         );
                                 },
                               ),

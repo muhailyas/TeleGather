@@ -34,13 +34,14 @@ class TextFormFieldWidget extends StatelessWidget {
             }
             return null;
           },
-          style: const TextStyle(color: Colors.white),
+          style: TextStyle(color: Theme.of(context).colorScheme.secondary),
           decoration: InputDecoration(
             label: Text(label),
-            labelStyle: const TextStyle(color: Colors.white),
-            focusedBorder: textFieldBorderStyle,
-            border: textFieldBorderStyle,
-            enabledBorder: textFieldBorderStyle,
+            labelStyle:
+                TextStyle(color: Theme.of(context).colorScheme.secondary),
+            focusedBorder: textFieldBorderStyle(context),
+            border: textFieldBorderStyle(context),
+            enabledBorder: textFieldBorderStyle(context),
           ),
         ));
   }

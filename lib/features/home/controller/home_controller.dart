@@ -5,6 +5,7 @@ import 'package:video_call_app/features/home/services/home_services.dart';
 
 class HomeController extends ChangeNotifier {
   bool isdelete = false;
+  final TextEditingController codeController = TextEditingController();
   VideoConferenceModel? videoConferenceInfo;
   String instantId = '';
   bool deleteLoading = false;

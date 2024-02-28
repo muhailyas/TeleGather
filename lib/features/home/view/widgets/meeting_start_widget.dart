@@ -23,7 +23,9 @@ class MeetingStartWidget extends StatelessWidget {
       width: Responsive.width / 2.2,
       decoration: BoxDecoration(
         color: backgroundColor,
-        border: border != null ? Border.all(color: Colors.teal) : null,
+        border: border != null
+            ? Border.all(color: Theme.of(context).colorScheme.primary)
+            : null,
         borderRadius: BorderRadius.circular(20),
       ),
       child: Center(

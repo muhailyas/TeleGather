@@ -17,7 +17,6 @@ class ScreenSignUp extends StatelessWidget {
     final authProvider = Provider.of<AuthenticationController>(context);
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Colors.transparent,
         body: Form(
           key: authProvider.signUpFormKey,
           child: Column(
@@ -29,19 +28,19 @@ class ScreenSignUp extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text(
+                    Text(
                       "Join TeleGather Today",
                       style: TextStyle(
                           fontSize: 25,
                           fontWeight: FontWeight.bold,
-                          color: Colors.white),
+                          color: Theme.of(context).colorScheme.secondary),
                     ),
                     SizedBox(height: Responsive.height * 0.01),
-                    const Text(
+                    Text(
                       "Experience seamless video conferencing",
                       style: TextStyle(
                         fontSize: 20,
-                        color: Colors.white,
+                        color: Theme.of(context).colorScheme.secondary,
                       ),
                     ),
                   ],
@@ -96,7 +95,7 @@ class ScreenSignUp extends StatelessWidget {
                 child: Text(
                   "Already have an account?",
                   style:
-                      TextStyle(color: Colors.teal.withOpacity(0.9).withRed(5)),
+                      TextStyle(color: Theme.of(context).colorScheme.primary),
                 ),
               ),
               SizedBox(height: Responsive.height * 0.02),

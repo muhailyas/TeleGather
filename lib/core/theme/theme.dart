@@ -2,20 +2,28 @@ import 'package:flutter/material.dart';
 
 import '../responsive/responsive.dart';
 
-final textFieldBorderStyle = OutlineInputBorder(
-  borderSide: const BorderSide(color: Colors.teal),
-  borderRadius: BorderRadius.circular(25),
-);
+OutlineInputBorder textFieldBorderStyle(BuildContext context) {
+  return OutlineInputBorder(
+    borderSide: BorderSide(color: Theme.of(context).colorScheme.primary),
+    borderRadius: BorderRadius.circular(25),
+  );
+}
 
-final elevatedButtonStyle = ButtonStyle(
-    shape: MaterialStatePropertyAll(
-        RoundedRectangleBorder(borderRadius: BorderRadius.circular(30))),
-    fixedSize: MaterialStatePropertyAll(
-        Size(Responsive.width * 0.8, Responsive.height * 0.065)),
-    backgroundColor: const MaterialStatePropertyAll(Colors.white));
+ButtonStyle elevatedButtonStyle(BuildContext context) {
+  return ButtonStyle(
+      shape: MaterialStatePropertyAll(
+          RoundedRectangleBorder(borderRadius: BorderRadius.circular(30))),
+      fixedSize: MaterialStatePropertyAll(
+          Size(Responsive.width * 0.8, Responsive.height * 0.065)),
+      backgroundColor:
+          MaterialStatePropertyAll(Theme.of(context).colorScheme.primary));
+}
 
-final buttonStyle = ButtonStyle(
-    backgroundColor: const MaterialStatePropertyAll(Colors.transparent),
-    shape: MaterialStatePropertyAll(
-        RoundedRectangleBorder(borderRadius: BorderRadius.circular(20))),
-    side: const MaterialStatePropertyAll(BorderSide(color: Colors.teal)));
+buttonStyle(context) {
+  return ButtonStyle(
+      backgroundColor:
+          MaterialStatePropertyAll(Theme.of(context).colorScheme.background),
+      shape: MaterialStatePropertyAll(
+          RoundedRectangleBorder(borderRadius: BorderRadius.circular(20))),
+      side: const MaterialStatePropertyAll(BorderSide(color: Colors.teal)));
+}

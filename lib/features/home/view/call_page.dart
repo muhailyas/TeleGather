@@ -44,68 +44,41 @@ class VideoConferencePage extends StatelessWidget {
                       },
                       child: AnimatedContainer(
                           duration: const Duration(seconds: 1),
-                          width: copyLinkVisibility.value
-                              ? Responsive.width * 0.4
-                              : Responsive.width * 0.1,
+                          width: Responsive.width * 0.3,
                           height: Responsive.height * 0.05,
                           decoration: BoxDecoration(
                               color: Colors.black54,
                               borderRadius: BorderRadius.circular(20),
-                              border: Border.all(color: Colors.teal)),
+                              border: Border.all(
+                                  color:
+                                      Theme.of(context).colorScheme.primary)),
                           child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              value
-                                  ? const Icon(Icons.arrow_back_ios_new_rounded,
-                                      size: 30, color: Colors.teal)
-                                  : const Icon(Icons.arrow_forward_ios_rounded,
-                                      size: 30, color: Colors.teal),
-                              FutureBuilder(
-                                future:
-                                    Future.delayed(const Duration(seconds: 1)),
-                                builder: (context, snapshot) {
-                                  if (snapshot.connectionState ==
-                                      ConnectionState.waiting) {
-                                    return const SizedBox();
-                                  } else {
-                                    if (copyLinkVisibility.value) {
-                                      return Row(
-                                        children: [
-                                          Text(
-                                            "Copy link",
-                                            overflow: TextOverflow.ellipsis,
-                                            style: TextStyle(
-                                              color: Colors.white,
-                                              fontSize: Responsive.text * 14,
-                                            ),
-                                          ),
-                                          SizedBox(
-                                              width: Responsive.width * 0.04),
-                                          InkWell(
-                                            onTap: () {
-                                              context
-                                                  .read<HomeController>()
-                                                  .copyToClipBoard(conferenceID)
-                                                  .then((value) =>
-                                                      ScaffoldMessenger.of(
-                                                              context)
-                                                          .showSnackBar(
-                                                              SnackBar(
-                                                                  content: Text(
-                                                                      value))));
-                                            },
-                                            child: const Icon(
-                                              Icons.copy_rounded,
-                                              color: Colors.teal,
-                                            ),
-                                          ),
-                                        ],
-                                      );
-                                    } else {
-                                      return const SizedBox();
-                                    }
-                                  }
+                              Text(
+                                "Copy link",
+                                overflow: TextOverflow.ellipsis,
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: Responsive.text * 14,
+                                ),
+                              ),
+                              SizedBox(width: Responsive.width * 0.04),
+                              InkWell(
+                                onTap: () {
+                                  context
+                                      .read<HomeController>()
+                                      .copyToClipBoard(conferenceID)
+                                      .then((value) => ScaffoldMessenger.of(
+                                              context)
+                                          .showSnackBar(
+                                              SnackBar(content: Text(value))));
                                 },
-                              )
+                                child: Icon(
+                                  Icons.copy_rounded,
+                                  color: Theme.of(context).colorScheme.primary,
+                                ),
+                              ),
                             ],
                           )),
                     );

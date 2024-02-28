@@ -23,7 +23,7 @@ class ScreenSplashState extends State<ScreenSplash>
     super.initState();
     _controller = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds:2500 ),
+      duration: const Duration(milliseconds: 2500),
     );
     _animation = Tween<double>(begin: 0.0, end: 1.0).animate(_controller);
     _controller.forward();
@@ -32,7 +32,7 @@ class ScreenSplashState extends State<ScreenSplash>
         context
             .read<SplashController>()
             .checkUserExistenceAndNavigate()
-            .then((value) => navigate(value,context));
+            .then((value) => navigate(value, context));
       }
     });
   }
@@ -60,7 +60,7 @@ class ScreenSplashState extends State<ScreenSplash>
               "TeleGather",
               style: TextStyle(
                 fontSize: Responsive.text * 30,
-                color: Colors.white,
+                color: Theme.of(context).colorScheme.secondary,
                 fontWeight: FontWeight.bold,
               ),
             ),
