@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:video_call_app/core/constants/constants.dart';
 import 'package:video_call_app/core/responsive/responsive.dart';
 import 'package:video_call_app/features/home/controller/home_controller.dart';
+import 'package:video_call_app/features/home/controller/permission_controller.dart';
 import 'package:video_call_app/features/home/view/join_with_code.dart';
 import 'package:video_call_app/features/home/view/widgets/meeting_start_widget.dart';
 import 'package:video_call_app/features/home/view/widgets/new_conference.dart';
@@ -18,6 +19,8 @@ class ScreenHome extends StatelessWidget {
   Widget build(BuildContext context) {
     context.read<ProfileController>().getUserProfile();
     context.read<HomeController>().getConferences();
+    context.read<PermissionController>().requestPermissions();
+
     return Scaffold(appBar: _buildAppBar(context), body: _buildBody(context));
   }
 

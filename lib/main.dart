@@ -6,6 +6,7 @@ import 'package:video_call_app/core/theme/theme_provider.dart';
 import 'package:video_call_app/features/authentication/controller/authentication_controller.dart';
 import 'package:video_call_app/features/home/controller/home_controller.dart';
 import 'package:video_call_app/features/home/controller/join_controller.dart';
+import 'package:video_call_app/features/home/controller/permission_controller.dart';
 import 'package:video_call_app/features/proflie/controller/profile_controller.dart';
 import 'package:video_call_app/features/splash/controller/splash_controller.dart';
 import 'package:video_call_app/features/splash/view/splash.dart';
@@ -44,6 +45,9 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider<UiProvider>(
           create: (context) => UiProvider(),
+        ),
+        ChangeNotifierProvider<PermissionController>(
+          create: (context) => PermissionController(),
         ),
       ],
       child: Consumer<UiProvider>(builder: (context, value, _) {

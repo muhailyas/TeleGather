@@ -121,8 +121,11 @@ class ScreenProfile extends StatelessWidget {
 
   AppBar _buildAppBar(BuildContext context) {
     return AppBar(
-      leading: Icon(Icons.arrow_back,
-          color: Theme.of(context).colorScheme.secondary),
+      leading: InkWell(
+        onTap: () => Navigator.pop(context),
+        child: Icon(Icons.arrow_back,
+            color: Theme.of(context).colorScheme.secondary),
+      ),
       elevation: 0,
       backgroundColor: Theme.of(context).colorScheme.background,
       title: Text(

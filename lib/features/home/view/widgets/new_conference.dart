@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:video_call_app/core/responsive/responsive.dart';
 import 'package:video_call_app/features/home/controller/home_controller.dart';
+import 'package:video_call_app/features/home/controller/permission_controller.dart';
 import 'package:video_call_app/features/home/view/call_page.dart';
 
 class NewConferenceBottomSheet extends StatelessWidget {
@@ -18,9 +19,16 @@ class NewConferenceBottomSheet extends StatelessWidget {
             ListTile(
               onTap: () {
                 context
-                    .read<HomeController>()
-                    .startQuickConference()
-                    .then((value) => result(value, context, data));
+                    .read<PermissionController>()
+                    .checkPermissions()
+                    .then((value) {
+                  if (value) {
+                    context
+                        .read<HomeController>()
+                        .startQuickConference()
+                        .then((value) => result(value, context, data));
+                  }
+                });
               },
               leading: Icon(Icons.video_call_rounded,
                   color: Theme.of(context).colorScheme.secondary),

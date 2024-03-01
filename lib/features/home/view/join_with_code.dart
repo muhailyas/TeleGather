@@ -21,9 +21,14 @@ class ScreenJoinWithCode extends StatelessWidget {
 
   AppBar _buildAppbar(BuildContext context) {
     return AppBar(
+      leading: InkWell(
+          onTap: () => Navigator.pop(context),
+          child: Icon(Icons.arrow_back,
+              color: Theme.of(context).colorScheme.secondary)),
       elevation: 0,
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-      title: const Text("Join with a code"),
+      title: Text("Join with a code",
+          style: TextStyle(color: Theme.of(context).colorScheme.secondary)),
       actions: [
         Padding(
           padding: EdgeInsets.symmetric(
